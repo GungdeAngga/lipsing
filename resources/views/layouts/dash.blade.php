@@ -79,7 +79,7 @@
                     <li><a href="/dashboard/about"><i class="fa fa-dashboard"></i> <span>Sesuaikan</span></a></li>
                     <li><a href="/dashboard/kecamatan"><i class="fa fa-map-marker"></i> <span>Kecamatan</span></a></li>
                     <li><a href="/dashboard/desa"><i class="fa fa-home"></i> <span>Desa</span></a></li>
-                    <li class="active" ><a href="/dashboard/potensi"><i class="fa fa-bar-chart"></i> <span>Potensi</span></a></li>
+                    <li><a href="/dashboard/potensi"><i class="fa fa-bar-chart"></i> <span>Potensi</span></a></li>
                     <li><a href="/dashboard/umkm"><i class="fa fa-industry"></i> <span>UMKM</span></a>
                     </li>
                 </ul>

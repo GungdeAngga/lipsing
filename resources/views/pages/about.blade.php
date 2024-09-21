@@ -4,13 +4,14 @@
 <div class="spacer" style="height: 100px;"></div>
 
 {{-- About Lipsing --}}
+@if($item)
 <div class="container">
     <div class="row">
         <div data-aos="fade-right" data-aos-delay="100" class="col-md-5 mt-4">
             <h1 style="color: #219C90; font-weight: 700; line-height: normal;">About LIPSING</h1>
-            <h5 class="mt-5" style="color: rgba(0, 0, 0, 0.70); font-weight: 300; line-height: normal; text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</h5>
-       </div>
-       <div class="col mx-auto"></div>
+            <h5 class="mt-5" style="color: rgba(0, 0, 0, 0.70); font-weight: 300; line-height: normal; text-align: justify;">{{ $item->about_lipsing }}</h5>
+        </div>
+        <div class="col mx-auto"></div>
         <div data-aos="fade-left" data-aos-delay="300" class="col-md-6">
             <img src="image/ilustrasi-about.png" alt="ilustrasi about" width="100%">
         </div>
@@ -29,7 +30,7 @@
                     <img src="icon/map.png" alt="" width="30px">
                 </div>
                 <div class="col" style="color: rgba(0, 0, 0, 0.70);">
-                    <p>Jl. Ngurah Rai No. 72 Singaraja</p>
+                    <p>{{ $item->address }}</p>
                 </div>
             </div>
             <div class="row mt-3">
@@ -37,7 +38,7 @@
                     <img src="icon/phone.png" alt="" width="30px">
                 </div>
                 <div class="col" style="color: rgba(0, 0, 0, 0.70);">
-                    <p>(0362) 22063</p>
+                    <p>{{ $item->phone_number }}</p>
                 </div>
             </div>
             <div class="row mt-3">
@@ -45,7 +46,7 @@
                     <img src="icon/email.png" alt="" width="30px">
                 </div>
                 <div class="col" style="color: rgba(0, 0, 0, 0.70);">
-                    <p>dpmptsp@bulelengkab.go.id</p>
+                    <p><a href="mailto:{{ $item->email }}">{{ $item->email }}</a></p>
                 </div>
             </div>
             <div class="row mt-3">
@@ -53,7 +54,7 @@
                     <img src="icon/fb.png" alt="" width="30px">
                 </div>
                 <div class="col" style="color: rgba(0, 0, 0, 0.70);">
-                    <p>Facebook Dpmptsp</p>
+                    <p><a href="{{ $item->facebook }}">{{ $item->facebook }}</a></p>
                 </div>
             </div>
             <div class="row mt-3">
@@ -61,7 +62,7 @@
                     <img src="icon/ig.png" alt="" width="30px">
                 </div>
                 <div class="col" style="color: rgba(0, 0, 0, 0.70);">
-                    <p>Instagram Dpmptsp</p>
+                    <p><a href="{{ $item->instagram }}">{{ $item->instagram }}</a></p>
                 </div>
             </div>
             <div class="row mt-3">
@@ -69,12 +70,14 @@
                     <img src="icon/yt.png" alt="" width="30px">
                 </div>
                 <div class="col" style="color: rgba(0, 0, 0, 0.70);">
-                    <p>Youtube Dpmptsp</p>
+                    <p><a href="{{ $item->youtube }}">{{ $item->youtube }}</a></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+@else
+<p>No information available.</p>
+@endif
 <div class="spacer" style="height: 100px;"></div>
 @endsection

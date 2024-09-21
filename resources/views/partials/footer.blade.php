@@ -5,11 +5,7 @@
             <div class="col-md-4">
                 <img src="icon/Logo Lipsing.png" height="80" alt="logo">
                 <p class="mt-3">Dengan ini kami berkomitmen untuk memberikan layanan terbaik.</p>
-                <div class="col">
-                    <a href="/login">
-                        <button type="button" class="btn btn-outline-light">Login Admin</button>
-                    </a>
-                </div>
+                
             </div>
             <div class="col-md-4">
                 <h3>Tautan Berguna</h3>

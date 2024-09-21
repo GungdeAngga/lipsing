@@ -20,73 +20,83 @@
     }
 </style>
 @section('content')
-    <div class="container">
-        <div class="spacer" style="height: 30px;"></div>
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Tambah data UMKM</h3>
-            </div>
-            <!-- /.box-header -->
-
-            <!-- form start -->
-            <form role="form" action="" method="">
-                @csrf
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="...">Nama UMKM</label>
-                        <input type="text" class="form-control" name="..." placeholder="Masukan Nama UMKM">
-                    </div>
-                    <div class="form-group">
-                        <label for="...">Deskripsi</label>
-                        <textarea class="form-control" rows="3" name="..." placeholder="Masukan Deskripsi"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="...">Alamat</label>
-                        <input type="text" class="form-control" name="..." placeholder="Masukan Alamat">
-                    </div>
-                    <div class="form-group">
-                        <label for="pilihan">Pilih Kecamatan:</label>
-                        <select class="form-control" name="pilihan" id="pilihan">
-                            <option value="opsi1">Gerokgak</option>
-                            <option value="opsi2">Seririt</option>
-                            <option value="opsi3">Busungbiu</option>
-                            <option value="opsi3">Banjar</option>
-                            <option value="opsi3">Sukasada</option>
-                            <option value="opsi3">Buleleng</option>
-                            <option value="opsi3">Sawan</option>
-                            <option value="opsi3">Kubutambahan</option>
-                            <option value="opsi3">Tejakula</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="...">No Hp</label>
-                        <input type="text" class="form-control" name="..." placeholder="Masukan No Hp">
-                    </div>
-                    <div class="form-group">
-                        <label for="...">Youtube Link</label>
-                        <input type="text" class="form-control" name="..." placeholder="Masukan link Youtube">
-                    </div>
-                    <div class="form-group">
-                        <label for="...">Map Link</label>
-                        <input type="text" class="form-control" name="..." placeholder="Masukan link Map">
-                    </div>
-                    <div class="note">
-                        <p>Drag and drop atau dengan memilih gambar melalui tombol </p>
-                    </div>
-                    <div>
-                        <label for="...">Input Gambar</label>
-                        <input class="mt-3" type="file" name="images[]" id="images" multiple accept="image/*">
-                    </div>
-
-                    {{-- tombol simpan --}}
-                    <a href="...">
-                        <button type="submit" class="btn btn-primary btn-sm pull-right">
-                            <i class="fa fa-save"></i> Simpan
-                        </button>
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
+<div class="container">
     <div class="spacer" style="height: 30px;"></div>
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Tambah data UMKM</h3>
+        </div>
+        <!-- /.box-header -->
+
+        <!-- form start -->
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        <form action="{{ route('umkm.update', $umkm->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="...">Nama UMKM</label>
+                    <input type="text" class="form-control" id="name_umkm" name="name_umkm" value="{{ $umkm->name_umkm }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="...">kontak</label>
+                    <input type="text" class="form-control" id="contact" name="contact" value="{{ $umkm->contact }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="...">Deskripsi UMKM</label>
+                    <textarea class="form-control" id="description" name="description" required>{{ $umkm->description }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="...">Alamat UMKM</label>
+                    <input type="text" class="form-control" id="address" name="address" value="{{ $umkm->address }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="pilihan">Pilih Kecamatan:</label>
+                    <select name="kecamatan" class="form-control" required>
+                        <option value="Gerokgak" {{ $umkm->kecamatan == 'Gerokgak' ? 'selected' : '' }}>Gerokgak</option>
+                        <option value="Seririt" {{ $umkm->kecamatan == 'Seririt' ? 'selected' : '' }}>Seririt</option>
+                        <option value="Busungbiu" {{ $umkm->kecamatan == 'Busungbiu' ? 'selected' : '' }}>Busungbiu</option>
+                        <option value="Banjar" {{ $umkm->kecamatan == 'Banjar' ? 'selected' : '' }}>Banjar</option>
+                        <option value="Sukasada" {{ $umkm->kecamatan == 'Sukasada' ? 'selected' : '' }}>Sukasada</option>
+                        <option value="Buleleng" {{ $umkm->kecamatan == 'Buleleng' ? 'selected' : '' }}>Buleleng</option>
+                        <option value="Sawan" {{ $umkm->kecamatan == 'Sawan' ? 'selected' : '' }}>Sawan</option>
+                        <option value="Kubutambahan" {{ $umkm->kecamatan == 'Kubutambahan' ? 'selected' : '' }}>Kubutambahan</option>
+                        <option value="Tejakula" {{ $umkm->kecamatan == 'Tejakula' ? 'selected' : '' }}>Tejakula</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="youtube">Youtube</label>
+                    <input type="text" class="form-control" id="youtube" name="youtube" value="{{ $umkm->youtube }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="map_link">Map Link</label>
+                    <input type="text" class="form-control" id="map_link" name="map_link" value="{{ $umkm->map_link }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control" id="image" name="image" multiple accept="image/*">
+                    @if ($umkm->image)
+                    <img src="{{ asset('storage/'.$umkm->image) }}" alt="Image" style="width: 150px; height: auto;">
+                    @endif
+                </div>
+
+                {{-- tombol simpan --}}
+
+                <button type="submit" class="btn btn-primary btn-sm pull-right">
+                    <i class="fa fa-save"></i> Simpan
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+<div class="spacer" style="height: 30px;"></div>
 @endsection

@@ -1,6 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\DesaController;
+use App\Http\Controllers\PotensiController;
+use App\Http\Controllers\UmkmController;
+use App\Http\Controllers\Auth\LoginController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +26,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages/home');
 });
+
+Route::resource('potensi', PotensiController::class);
+
+Route::get('/jenis-investasi/{category}', [PotensiController::class, 'filter'])->name('jenis-investasi.filter');
+route::get('/jenis-investasi-open/{id}', [PotensiController::class, 'show'])->name('jenis-investasi-open');
+route::get('/umkm', [UmkmController::class, 'show'])->name('umkm.list');
+route::get('/umkm-open/{umkm}', [UmkmController::class, 'showSingleUmkm'])->name('umkm-open');
+
+
+
 Route::get('/jenis-investasi', function () {
     return view('pages/jenis-investasi');
 });
@@ -34,86 +52,34 @@ Route::get('/desa-open', function () {
 });
 
 
-Route::get('/umkm', function () {
-    return view('pages/umkm');
-});
-Route::get('/umkm-open', function () {
-    return view('pages/umkm-open');
-});
+// Route::get('/umkm', function () {
+//     return view('pages/umkm');
+// });
+// Route::get('/umkm-open', function () {
+//     return view('pages/umkm-open');
+// });
 
 
-
-Route::get('/about', function () {
-    return view('pages/about');
-});
+Route::get('/about', [AboutUsController::class, 'show'])->name('about.show');
 
 
 
 // Dashboard
-Route::get('/login', function () {
-    return view('dashboard/login');
-});
 
+Route::get('login', function () {
+    return view('dashboard.auth.login');
+})->name('login');
 
-Route::get('/dashboard/about', function () {
-    return view('dashboard/about/index');
-});
-Route::get('/dashboard/about/edit', function () {
-    return view('dashboard/about/edit');
-});
+// Handle login
+Route::post('login', [LoginController::class, 'login'])->name('login.post');
 
+// Logout
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard/kecamatan', function () {
-    return view('dashboard/kecamatan/index');
-});
-Route::get('/dashboard/kecamatan/create', function () {
-    return view('dashboard/kecamatan/create');
-});
-Route::get('/dashboard/kecamatan/edit', function () {
-    return view('dashboard/kecamatan/edit');
-});
-Route::get('/dashboard/kecamatan/fasilitas/create', function () {
-    return view('dashboard/kecamatan/fasilitas/create');
-});
-Route::get('/dashboard/kecamatan/fasilitas/edit', function () {
-    return view('dashboard/kecamatan/fasilitas/edit');
-});
-
-
-Route::get('/dashboard/umkm', function () {
-    return view('dashboard/umkm/index');
-});
-Route::get('/dashboard/umkm/create', function () {
-    return view('dashboard/umkm/create');
-});
-Route::get('/dashboard/umkm/edit', function () {
-    return view('dashboard/umkm/edit');
-});
-
-
-Route::get('/dashboard/potensi', function () {
-    return view('dashboard/potensi/index');
-});
-Route::get('/dashboard/potensi/create', function () {
-    return view('dashboard/potensi/create');
-});
-Route::get('/dashboard/potensi/edit', function () {
-    return view('dashboard/potensi/edit');
-});
-
-
-Route::get('/dashboard/desa', function () {
-    return view('dashboard/desa/index');
-});
-Route::get('/dashboard/desa/create', function () {
-    return view('dashboard/desa/create');
-});
-Route::get('/dashboard/desa/edit', function () {
-    return view('dashboard/desa/edit');
-});
-Route::get('/dashboard/desa/potensi/create', function () {
-    return view('dashboard/desa/potensi/create');
-});
-Route::get('/dashboard/desa/potensi/edit', function () {
-    return view('dashboard/desa/potensi/edit');
+Route::middleware(['auth'])->prefix('dashboard')->group(function () {
+    Route::resource('desa', DesaController::class);
+    Route::resource('about', AboutUsController::class);
+    Route::resource('kecamatan', KecamatanController::class);
+    Route::resource('potensi', PotensiController::class);
+    Route::resource('umkm', UmkmController::class);
 });

@@ -20,79 +20,80 @@
     }
 </style>
 @section('content')
-    <div class="container">
-        <div class="spacer" style="height: 30px;"></div>
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Edit data Potensi</h3>
-            </div>
-            <!-- /.box-header -->
-
-            <!-- form start -->
-            <form role="form" action="" method="">
-                @csrf
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="...">Nama</label>
-                        <input type="text" class="form-control" name="..." placeholder="Masukan Nama UMKM">
-                    </div>
-                    <div class="form-group">
-                        <label for="pilihan">Pilih Kategori:</label>
-                        <select class="form-control" name="pilihan" id="pilihan">
-                            <option value="opsi1">Peternakan</option>
-                            <option value="opsi2">Pertanian</option>
-                            <option value="opsi3">Perikanan</option>
-                            <option value="opsi3">Perkebunan</option>
-                            <option value="opsi3">Pariwisata</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="...">Deskripsi</label>
-                        <textarea class="form-control" rows="3" name="..." placeholder="Masukan Deskripsi"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="...">Alamat</label>
-                        <input type="text" class="form-control" name="..." placeholder="Masukan Alamat">
-                    </div>
-                    <div class="form-group">
-                        <label for="pilihan">Pilih Kecamatan:</label>
-                        <select class="form-control" name="pilihan" id="pilihan">
-                            <option value="opsi1">Gerokgak</option>
-                            <option value="opsi2">Seririt</option>
-                            <option value="opsi3">Busungbiu</option>
-                            <option value="opsi3">Banjar</option>
-                            <option value="opsi3">Sukasada</option>
-                            <option value="opsi3">Buleleng</option>
-                            <option value="opsi3">Sawan</option>
-                            <option value="opsi3">Kubutambahan</option>
-                            <option value="opsi3">Tejakula</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="...">Youtube Link</label>
-                        <input type="text" class="form-control" name="..." placeholder="Masukan link Youtube">
-                    </div>
-                    <div class="form-group">
-                        <label for="...">Map Link</label>
-                        <input type="text" class="form-control" name="..." placeholder="Masukan link Map">
-                    </div>
-                    <div class="note">
-                        <p>Drag and drop atau dengan memilih gambar melalui tombol </p>
-                    </div>
-                    <div>
-                        <label for="...">Input Gambar</label>
-                        <input class="mt-3" type="file" name="images[]" id="images" multiple accept="image/*">
-                    </div>
-
-                    {{-- tombol simpan --}}
-                    <a href="...">
-                        <button type="submit" class="btn btn-primary btn-sm pull-right">
-                            <i class="fa fa-save"></i> Simpan
-                        </button>
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
+<div class="container">
     <div class="spacer" style="height: 30px;"></div>
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Edit data Potensi</h3>
+        </div>
+        <!-- /.box-header -->
+
+        <!-- form start -->
+        <form action="{{ route('potensi.update', $potensi->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="...">Nama Potensi</label>
+                    <input type="text" class="form-control" id="potensi" name="potensi" value="{{ $potensi->potensi }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="...">Katagori</label>
+                    <select name="category_potensi" class="form-control" required>
+                        <option value="Peternakan" {{ $potensi->category_potensi == 'Peternakan' ? 'selected' : '' }}>Peternakan</option>
+                        <option value="Pertanian" {{ $potensi->category_potensi == 'Pertanian' ? 'selected' : '' }}>Pertanian</option>
+                        <option value="Perikanan" {{ $potensi->category_potensi == 'Perikanan' ? 'selected' : '' }}>Perikanan</option>
+                        <option value="Perkebunan" {{ $potensi->category_potensi == 'Perkebunan' ? 'selected' : '' }}>Perkebunan</option>
+                        <option value="Pariwisata" {{ $potensi->category_potensi == 'Pariwisata' ? 'selected' : '' }}>Pariwisata</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="...">Deskripsi Potensi</label>
+                    <textarea class="form-control" id="description_potensi" name="description_potensi" required>{{ $potensi->description_potensi }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="...">Alamat Potensi</label>
+                    <input type="text" class="form-control" id="address_potensi" name="address_potensi" value="{{ $potensi->address_potensi }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="pilihan">Pilih Kecamatan:</label>
+                    <select name="kecamatan_potensi" class="form-control" required>
+                        <option value="Gerokgak" {{ $potensi->kecamatan_potensi == 'Gerokgak' ? 'selected' : '' }}>Gerokgak</option>
+                        <option value="Seririt" {{ $potensi->kecamatan_potensi == 'Seririt' ? 'selected' : '' }}>Seririt</option>
+                        <option value="Busungbiu" {{ $potensi->kecamatan_potensi == 'Busungbiu' ? 'selected' : '' }}>Busungbiu</option>
+                        <option value="Banjar" {{ $potensi->kecamatan_potensi == 'Banjar' ? 'selected' : '' }}>Banjar</option>
+                        <option value="Sukasada" {{ $potensi->kecamatan_potensi == 'Sukasada' ? 'selected' : '' }}>Sukasada</option>
+                        <option value="Buleleng" {{ $potensi->kecamatan_potensi == 'Buleleng' ? 'selected' : '' }}>Buleleng</option>
+                        <option value="Sawan" {{ $potensi->kecamatan_potensi == 'Sawan' ? 'selected' : '' }}>Sawan</option>
+                        <option value="Kubutambahan" {{ $potensi->kecamatan_potensi == 'Kubutambahan' ? 'selected' : '' }}>Kubutambahan</option>
+                        <option value="Tejakula" {{ $potensi->kecamatan_potensi == 'Tejakula' ? 'selected' : '' }}>Tejakula</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="youtube">Youtube</label>
+                    <input type="text" class="form-control" id="youtube_potensi" name="youtube_potensi" value="{{ $potensi->youtube_potensi }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="map_link">Map Link</label>
+                    <input type="text" class="form-control" id="map_link_potensi" name="map_link_potensi" value="{{ $potensi->map_link_potensi }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="image_path">Image</label>
+                    <input type="file" name="image_path" class="form-control" id="image_path" multiple accept="image/*">
+                    @if($potensi->image_path)
+                    <img src="{{ asset($potensi->image_path) }}" alt="Image" width="100">
+                    @endif
+                </div>
+
+                {{-- tombol simpan --}}
+
+                <button type="submit" class="btn btn-primary btn-sm pull-right">
+                    <i class="fa fa-save"></i> Simpan
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+<div class="spacer" style="height: 30px;"></div>
 @endsection
